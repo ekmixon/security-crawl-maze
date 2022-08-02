@@ -13,6 +13,7 @@
 # limitations under the License.
 # ==============================================================================
 """Module containing all utility functions used in the application."""
+
 import json
 import os
 import re
@@ -33,22 +34,20 @@ EXPECTED_RESULTS = json.load(EXPECTED_RESULTS_FILE)
 # Remove trailing slash, join expexted paths with "|" and escape dots.
 PATHS_REGEX_STRING = "|".join(
     [re.sub(r"^/", "", item) for item in EXPECTED_RESULTS]).replace(".", r"\.")
-PATH_REGEX = re.compile("^(" + PATHS_REGEX_STRING + ")$")
+PATH_REGEX = re.compile(f"^({PATHS_REGEX_STRING})$")
 
 
 @utils_module.route("/fetch-expected-results")
 def fetch_expected_results():
   """Returns a list of expected findings from a starting path."""
-  response_results = []
   path = request.args.get("path", "")
 
   if not path:
     return Response("Please, provide the path parameter.", 400)
 
-  for result in EXPECTED_RESULTS:
-    if result.startswith(path):
-      response_results.append(result)
-
+  response_results = [
+      result for result in EXPECTED_RESULTS if result.startswith(path)
+  ]
   return jsonify(response_results)
 
 
@@ -63,4 +62,4 @@ def valid_resource(path):
 
 def random_response():
   letters = string.ascii_letters + "\n "
-  return "\n".join(random.choice(letters) for i in range(1000))
+  return "\n".join(random.choice(letters) for _ in range(1000))

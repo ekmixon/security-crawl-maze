@@ -13,6 +13,7 @@
 # limitations under the License.
 # ==============================================================================
 """Module serving all the traffic for html test cases."""
+
 import os
 from flask import abort
 from flask import Blueprint
@@ -23,7 +24,7 @@ from flask import send_from_directory
 html_module = Blueprint("html_module", __name__, template_folder="templates")
 
 # Global app.instance_path is not accessible from blueprints ¯\_(ツ)_/¯.
-TEST_CASES_PATH = os.path.abspath(__file__ + "/../../../test-cases/html/")
+TEST_CASES_PATH = os.path.abspath(f"{__file__}/../../../test-cases/html/")
 
 
 @html_module.route("/misc/url/full-url/")

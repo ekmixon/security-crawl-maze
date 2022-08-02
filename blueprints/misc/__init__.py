@@ -13,6 +13,7 @@
 # limitations under the License.
 # ==============================================================================
 """Module serving all the traffic for misc test cases."""
+
 import os
 from flask import abort
 from flask import Blueprint
@@ -24,7 +25,7 @@ misc_module = Blueprint(
     "misc_module", __name__, template_folder="templates")
 
 # Global app.instance_path is not accessible from blueprints ¯\_(ツ)_/¯.
-TEST_CASES_PATH = os.path.abspath(__file__ + "/../../../test-cases/misc/")
+TEST_CASES_PATH = os.path.abspath(f"{__file__}/../../../test-cases/misc/")
 
 
 @misc_module.route("/", defaults={"path": ""})

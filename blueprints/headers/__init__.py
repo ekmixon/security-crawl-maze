@@ -13,6 +13,7 @@
 # limitations under the License.
 # ==============================================================================
 """Module serving all the traffic for response headers test cases."""
+
 import os
 from flask import abort
 from flask import Blueprint
@@ -25,7 +26,7 @@ headers_module = Blueprint(
     "headers_module", __name__, template_folder="templates")
 
 # Global app.instance_path is not accessible from blueprints ¯\_(ツ)_/¯.
-TEST_CASES_PATH = os.path.abspath(__file__ + "/../../../test-cases/headers/")
+TEST_CASES_PATH = os.path.abspath(f"{__file__}/../../../test-cases/headers/")
 
 
 @headers_module.route("/content-location/")

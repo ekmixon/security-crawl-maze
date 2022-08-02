@@ -13,6 +13,7 @@
 # limitations under the License.
 # ==============================================================================
 """Module serving all the traffic for javascript test cases."""
+
 import os
 from flask import abort
 from flask import Blueprint
@@ -26,7 +27,8 @@ javascript_module = Blueprint(
     "javascript_module", __name__, template_folder="templates")
 
 # Global app.instance_path is not accessible from blueprints ¯\_(ツ)_/¯.
-TEST_CASES_PATH = os.path.abspath(__file__ + "/../../../test-cases/javascript/")
+TEST_CASES_PATH = os.path.abspath(
+    f"{__file__}/../../../test-cases/javascript/")
 
 
 @javascript_module.route("/misc/comment.js")
